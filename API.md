@@ -230,8 +230,8 @@ Get all published pairings (public, no auth required).
       {
         "round": 1,
         "matches": [
-          { "home": "Team A", "away": "Team B" },
-          { "home": "Team C", "away": "Team D" }
+          { "home": "Team A", "away": "Team B", "played": false },
+          { "home": "Team C", "away": "Team D", "played": false }
         ]
       }
     ],
@@ -257,8 +257,8 @@ Get a single published pairing by ID (public, no auth required).
     {
       "round": 1,
       "matches": [
-        { "home": "Team A", "away": "Team B" },
-        { "home": "Team C", "away": "Team D" }
+        { "home": "Team A", "away": "Team B", "played": false },
+        { "home": "Team C", "away": "Team D", "played": false }
       ]
     }
   ],
@@ -307,7 +307,14 @@ Create a new pairing (admin only, requires JWT token).
 {
   "id": 1,
   "name": "Round Robin Tournament",
-  "rounds": [...],
+  "rounds": [
+    {
+      "round": 1,
+      "matches": [
+        { "home": "Team A", "away": "Team B", "played": false }
+      ]
+    }
+  ],
   "winner_selections": [],
   "created_at": "2026-06-18T12:34:56Z",
   "updated_at": "2026-06-18T12:34:56Z",
@@ -328,13 +335,20 @@ Create a new pairing (admin only, requires JWT token).
 ---
 
 ### PUT /pairings/:id
-Update an existing pairing (admin only, requires JWT token).
+Update an existing pairing (admin only, requires JWT token). Update the rounds array to mark individual matches as played.
 
 **Request:**
 ```javascript
 {
   "name": "Updated Tournament Name",
-  "rounds": [...],
+  "rounds": [
+    {
+      "round": 1,
+      "matches": [
+        { "home": "Team A", "away": "Team B", "played": true }
+      ]
+    }
+  ],
   "winner_selections": [{ "matchId": 1, "winner": "Team A" }],
   "is_published": 1
 }
@@ -345,7 +359,14 @@ Update an existing pairing (admin only, requires JWT token).
 {
   "id": 1,
   "name": "Updated Tournament Name",
-  "rounds": [...],
+  "rounds": [
+    {
+      "round": 1,
+      "matches": [
+        { "home": "Team A", "away": "Team B", "played": true }
+      ]
+    }
+  ],
   "winner_selections": [...],
   "created_at": "2026-06-18T12:34:56Z",
   "updated_at": "2026-06-18T13:00:00Z",
@@ -386,7 +407,14 @@ Toggle the publish status of a pairing (admin only, requires JWT token).
 {
   "id": 1,
   "name": "Round Robin Tournament",
-  "rounds": [...],
+  "rounds": [
+    {
+      "round": 1,
+      "matches": [
+        { "home": "Team A", "away": "Team B", "played": false }
+      ]
+    }
+  ],
   "winner_selections": [],
   "created_at": "2026-06-18T12:34:56Z",
   "updated_at": "2026-06-18T13:00:00Z",

@@ -19,7 +19,6 @@ router.get('/summary', async (req, res, next) => {
       id: p.id,
       name: p.name,
       is_published: p.is_published,
-      played: p.played === 1,
       created_at: p.created_at,
     }));
     res.json(summary);
@@ -39,7 +38,6 @@ router.get('/', async (req, res, next) => {
       created_at: p.created_at,
       updated_at: p.updated_at,
       is_published: p.is_published,
-      played: p.played === 1,
     }));
     res.json(parsed);
   } catch (error) {
@@ -65,7 +63,6 @@ router.get('/:id', async (req, res, next) => {
       created_at: pairing.created_at,
       updated_at: pairing.updated_at,
       is_published: pairing.is_published,
-      played: pairing.played === 1,
     });
   } catch (error) {
     next(error);
@@ -96,7 +93,6 @@ router.post('/', authenticateToken, async (req, res, next) => {
       created_at: pairing.created_at,
       updated_at: pairing.updated_at,
       is_published: pairing.is_published,
-      played: pairing.played === 1,
     });
   } catch (error) {
     next(error);
@@ -123,7 +119,6 @@ router.put('/:id', authenticateToken, async (req, res, next) => {
       created_at: updated.created_at,
       updated_at: updated.updated_at,
       is_published: updated.is_published,
-      played: updated.played === 1,
     });
   } catch (error) {
     next(error);
@@ -167,7 +162,6 @@ router.patch('/:id/publish', authenticateToken, async (req, res, next) => {
       created_at: updated.created_at,
       updated_at: updated.updated_at,
       is_published: updated.is_published,
-      played: updated.played === 1,
     });
   } catch (error) {
     next(error);
