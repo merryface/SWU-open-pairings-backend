@@ -90,13 +90,14 @@ async function updatePairing(id, fields) {
       ? JSON.stringify(fields.winner_selections)
       : existing.winner_selections,
     is_published: fields.is_published ?? existing.is_published,
+    played: fields.played ?? existing.played,
   };
 
   await db.run(
     `UPDATE pairings
-     SET name = ?, rounds = ?, winner_selections = ?, is_published = ?, updated_at = CURRENT_TIMESTAMP
+     SET name = ?, rounds = ?, winner_selections = ?, is_published = ?, played = ?, updated_at = CURRENT_TIMESTAMP
      WHERE id = ?`,
-    [updated.name, updated.rounds, updated.winner_selections, updated.is_published, id]
+    [updated.name, updated.rounds, updated.winner_selections, updated.is_published, updated.played, id]
   );
 
   return getPairing(id);

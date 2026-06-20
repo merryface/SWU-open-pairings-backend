@@ -30,6 +30,7 @@ async function initializeDatabase(databaseUrl) {
       name TEXT NOT NULL,
       rounds TEXT NOT NULL,
       winner_selections TEXT NOT NULL DEFAULT '[]',
+      played INTEGER NOT NULL DEFAULT 0,
       created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       is_published INTEGER NOT NULL DEFAULT 0
